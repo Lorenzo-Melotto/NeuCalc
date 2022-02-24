@@ -20,15 +20,17 @@ const modulo = document.querySelector("#modulo");
 const del = document.querySelector("#delete");
 const screen = document.querySelector("#result");
 
-let acc = 0;
-let storedNumber = 0;
-let lastOp = "";
-let isFirstOp = 1;
+/* logic  */
+let acc = 0; // accumulator
+let storedNumber = 0; // last entered number
+let lastOp = ""; // last operation selected
+let isFirstOp = 1; // wheter or not it's the first operation
 
-const storeNumber = (n) => {
-  storedNumber = n;
-};
-
+/**
+ * Calculates the result based on the last number stored, last number entered
+ * and the last operation selected.
+ * @returns void
+ */
 const calcResult = () => {
   let lastNum = parseFloat(screen.value);
   if (isNaN(lastNum)) {
@@ -46,8 +48,8 @@ const calcResult = () => {
       acc = storedNumber * lastNum;
       break;
     case "/":
-      console.log("last inserted num is: " + lastNum);
-      if (lastNum === "0") {
+      // handle division by zero
+      if (lastNum === 0) {
         screen.value = "ErrDivByZero";
         return;
       }
@@ -58,76 +60,82 @@ const calcResult = () => {
       break;
   }
 
-  screen.value = acc;
-  storeNumber(acc);
-  lastOp = "";
+  screen.value = acc; // put the result on the screen
+  storedNumber = acc; // save the result
+  lastOp = ""; // clear the last operation
 };
 
 /* add a click event to all the buttons */
+
 equal.addEventListener("click", () => {
   calcResult();
 });
 
 clear.addEventListener("click", () => {
-  screen.value = "";
+  screen.value = "0";
   acc = 0;
   isFirstOp = 1;
   lastOp = "";
 });
 
 one.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "1";
+  if (screen.value === "0") screen.value = "1";
+  else screen.value += "1";
 });
 
 two.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "2";
+  if (screen.value === "0") screen.value = "2";
+  else screen.value += "2";
 });
 
 three.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "3";
+  if (screen.value === "0") screen.value = "3";
+  else screen.value += "3";
 });
 
 four.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "4";
+  if (screen.value === "0") screen.value = "4";
+  else screen.value += "4";
 });
 
 five.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "5";
+  if (screen.value === "0") screen.value = "5";
+  else screen.value += "5";
 });
 
 six.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "6";
+  if (screen.value === "0") screen.value = "6";
+  else screen.value += "6";
 });
 
 seven.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "7";
+  if (screen.value === "0") screen.value = "7";
+  else screen.value += "7";
 });
 
 eight.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "8";
+  if (screen.value === "0") screen.value = "8";
+  else screen.value += "8";
 });
 
 nine.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  screen.value += "9";
+  if (screen.value === "0") screen.value = "9";
+  else screen.value += "9";
 });
 
 zero.addEventListener("click", () => {
-  // if (lastOp !== "") screen.value = "";
-  if (screen.value !== "") screen.value += "0";
+  // user can add only 1 zero
+  if (screen.value !== "0") screen.value += "0";
+});
+
+dot.addEventListener("click", () => {
+  if (screen.value === "") screen.value = "0.";
+  else screen.value += ".";
 });
 
 plus.addEventListener("click", () => {
   if (isFirstOp === 1) {
-    storeNumber(parseFloat(screen.value));
+    storedNumber = parseFloat(screen.value);
   } else {
     calcResult();
   }
@@ -138,7 +146,7 @@ plus.addEventListener("click", () => {
 
 minus.addEventListener("click", () => {
   if (isFirstOp === 1) {
-    storeNumber(parseFloat(screen.value));
+    storedNumber = parseFloat(screen.value);
   } else {
     calcResult();
   }
@@ -149,7 +157,7 @@ minus.addEventListener("click", () => {
 
 by.addEventListener("click", () => {
   if (isFirstOp === 1) {
-    storeNumber(parseFloat(screen.value));
+    storedNumber = parseFloat(screen.value);
   } else {
     calcResult();
   }
@@ -160,7 +168,7 @@ by.addEventListener("click", () => {
 
 slash.addEventListener("click", () => {
   if (isFirstOp === 1) {
-    storeNumber(parseFloat(screen.value));
+    storedNumber = parseFloat(screen.value);
   } else {
     calcResult();
   }
@@ -171,7 +179,7 @@ slash.addEventListener("click", () => {
 
 modulo.addEventListener("click", () => {
   if (isFirstOp === 1) {
-    storeNumber(parseFloat(screen.value));
+    storedNumber = parseFloat(screen.value);
   } else {
     calcResult();
   }
